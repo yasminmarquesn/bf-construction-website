@@ -414,13 +414,16 @@ body {
 /* Contact Section */
 .contact {
   padding: 4rem 2rem;
+  background: linear-gradient(135deg, #2a2a2a 0%, #252525 100%);
+  border-top: 4px solid var(--accent-color);
+  border-bottom: 4px solid var(--accent-color);
 }
 
 .contact h2 {
   font-size: 2.5rem;
   margin-bottom: 3rem;
   text-align: center;
-  color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 .contact-wrapper {
@@ -432,7 +435,7 @@ body {
 }
 
 .contact-info h3 {
-  color: var(--primary-color);
+  color: var(--accent-color);
   margin-bottom: 2rem;
   font-size: 1.5rem;
 }
@@ -442,13 +445,13 @@ body {
 }
 
 .info-item h4 {
-  color: var(--primary-color);
+  color: var(--accent-color);
   margin-bottom: 0.5rem;
 }
 
 .info-item a,
 .info-item p {
-  color: #666;
+  color: #ffffff;
   font-size: 1.05rem;
   text-decoration: none;
 }
@@ -467,7 +470,7 @@ body {
 }
 
 .contact-form h3 {
-  color: var(--primary-color);
+  color: var(--accent-color);
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
 }
