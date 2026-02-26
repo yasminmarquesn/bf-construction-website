@@ -56,7 +56,7 @@ function App() {
         <section className="hero">
           <div className="hero-content">
             <h2>Complete Home Renovations</h2>
-            <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
+            <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Construction and Renovation</p>
             <button className="cta-button" onClick={() => setActiveSection('contact')}>Get a Free Quote</button>
           </div>
         </section>
