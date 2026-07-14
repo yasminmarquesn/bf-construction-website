@@ -233,7 +233,7 @@ function App() {
                 </div>
                 <div className="info-item">
                   <h4>Email</h4>
-                  <a href="mailto:bfconstruction26@gmail.com">bfconstruction26@gmail.com</a>
+                  <a href="mailto:Info@bfconstruction.co.uk">Info@bfconstruction.co.uk</a>
                 </div>
                 <div className="info-item">
                   <h4>Location</h4>
@@ -324,7 +324,7 @@ function App() {
             <div className="footer-social">
               <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
               <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="social-link">WhatsApp</a>
-              <a href="mailto:bfconstruction26@gmail.com" className="social-link">Email</a>
+              <a href="mailto:Info@bfconstruction.co.uk" className="social-link">Email</a>
             </div>
           </div>
         </div>
