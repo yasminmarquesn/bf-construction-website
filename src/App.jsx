@@ -33,10 +33,10 @@ function App() {
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-logo">
+          <div className="nav-logo-centered">
             <img src="/logo.png" alt="BF Construction Solutions LTD Logo" className="logo-image" />
             <div className="logo-text">
-              <h1>BF Construction Solutions LTD</h1>
+              <h1>BF CONSTRUCTION SOLUTIONS LTD</h1>
               <p className="tagline">Transform Your Space, Elevate Your Day</p>
             </div>
           </div>
@@ -59,8 +59,8 @@ function App() {
       {/* Home Section */}
       {activeSection === 'home' && (
         <section className="home-section">
-          {/* Hero */}
-          <div className="hero">
+          {/* Hero with Split Luxury Background */}
+          <div className="hero-luxury">
             <div className="hero-content">
               <h2>Complete Home Renovations</h2>
               <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
@@ -156,29 +156,28 @@ function App() {
             </div>
           </section>
 
-          {/* Testimonials Preview */}
-          <section className="testimonials-preview">
+          {/* Google Reviews Integration */}
+          <section className="google-reviews-section">
             <div className="container">
-              <h2>What Our Clients Say</h2>
+              <h2>Google Reviews</h2>
+              <div className="google-rating-summary">
+                <div className="stars">★★★★★</div>
+                <p>Rated 5/5 based on our latest customer feedback</p>
+                <a href="https://share.google/lkFdWaO63XaxsgRce" target="_blank" rel="noopener noreferrer" className="google-btn">View Our Google Page & Reviews</a>
+              </div>
               <div className="testimonials-grid">
                 <div className="testimonial-card">
-                  <div className="stars">
-                    <span>★★★★★</span>
-                  </div>
-                  <p className="testimonial-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis - we'll reach out when we get round to tiling the fireplace if that suits"</p>
+                  <div className="stars"><span>★★★★★</span></div>
+                  <p className="testimonial-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis!"</p>
                   <p className="testimonial-author">Dan</p>
                 </div>
                 <div className="testimonial-card">
-                  <div className="stars">
-                    <span>★★★★★</span>
-                  </div>
-                  <p className="testimonial-text">"Morning, Yes keys arrived safe and sound. Thank you for the great work, the finishing is great, top quality. If there be anything require you to visit. And I will definitely consider your team for decorating works I plan in the spring. You too have a great day. All the best."</p>
+                  <div className="stars"><span>★★★★★</span></div>
+                  <p className="testimonial-text">"Thank you for the great work, the finishing is great, top quality. I will definitely consider your team for decorating works."</p>
                   <p className="testimonial-author">Stavros</p>
                 </div>
                 <div className="testimonial-card">
-                  <div className="stars">
-                    <span>★★★★★</span>
-                  </div>
+                  <div className="stars"><span>★★★★★</span></div>
                   <p className="testimonial-text">"Work is ready. Key is with your cleaner. Thank you so much! Sure you did a great job"</p>
                   <p className="testimonial-author">Georgia Leggy</p>
                 </div>
@@ -333,14 +332,14 @@ function App() {
                 <div className="stars">
                   <span>★★★★★</span>
                 </div>
-                <p className="testimonial-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis - we'll reach out when we get round to tiling the fireplace if that suits"</p>
+                <p className="testimonial-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis!"</p>
                 <p className="testimonial-author">Dan</p>
               </div>
               <div className="testimonial-card">
                 <div className="stars">
                   <span>★★★★★</span>
                 </div>
-                <p className="testimonial-text">"Morning, Yes keys arrived safe and sound. Thank you for the great work, the finishing is great, top quality. If there be anything require you to visit. And I will definitely consider your team for decorating works I plan in the spring. You too have a great day. All the best."</p>
+                <p className="testimonial-text">"Thank you for the great work, the finishing is great, top quality. I will definitely consider your team for decorating works."</p>
                 <p className="testimonial-author">Stavros</p>
               </div>
               <div className="testimonial-card">
