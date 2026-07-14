@@ -22,7 +22,7 @@ function App() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    const whatsappMessage = `Hello BF Construction, I would like to discuss a ${formData.projectType} renovation project. Name: ${formData.name}, Email: ${formData.email}, Phone: ${formData.phone}. ${formData.message}`
+    const whatsappMessage = `Hello BF Construction Solutions LTD, I would like to discuss a ${formData.projectType} renovation project. Name: ${formData.name}, Email: ${formData.email}, Phone: ${formData.phone}. ${formData.message}`
     const encodedMessage = encodeURIComponent(whatsappMessage)
     window.open(`https://wa.me/4407865516023?text=${encodedMessage}`, '_blank')
     setFormData({ name: '', email: '', phone: '', projectType: 'bathroom', message: '' })
@@ -34,9 +34,9 @@ function App() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-logo">
-            <img src="/logo.png" alt="BF Construction Logo" className="logo-image" />
+            <img src="/logo.png" alt="BF Construction Solutions LTD Logo" className="logo-image" />
             <div className="logo-text">
-              <h1>BF Construction</h1>
+              <h1>BF Construction Solutions LTD</h1>
               <p className="tagline">Transform Your Space, Elevate Your Day</p>
             </div>
           </div>
@@ -51,14 +51,135 @@ function App() {
         </div>
       </nav>
 
+      {/* Floating Contact Buttons */}
+      <div className="floating-contacts">
+        <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="floating-btn whatsapp-btn" title="Chat on WhatsApp">
+          <span className="btn-icon">💬</span>
+          <span className="btn-text">WhatsApp</span>
+        </a>
+        <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer" className="floating-btn instagram-btn" title="Follow on Instagram">
+          <span className="btn-icon">📷</span>
+          <span className="btn-text">Instagram</span>
+        </a>
+      </div>
+
       {/* Home Section */}
       {activeSection === 'home' && (
-        <section className="hero">
-          <div className="hero-content">
-            <h2>Complete Home Renovations</h2>
-            <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
-            <button className="cta-button" onClick={() => setActiveSection('contact')}>Get a Free Quote</button>
+        <section className="home-section">
+          {/* Hero */}
+          <div className="hero">
+            <div className="hero-content">
+              <h2>Complete Home Renovations</h2>
+              <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
+              <div className="hero-buttons">
+                <button className="cta-button" onClick={() => setActiveSection('contact')}>Get a Free Quote</button>
+                <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="cta-button whatsapp-cta">Message on WhatsApp</a>
+              </div>
+            </div>
           </div>
+
+          {/* Portfolio Preview on Home */}
+          <section className="portfolio-preview">
+            <div className="container">
+              <h2>Recent Projects</h2>
+              <p className="portfolio-intro">Showcasing our expertise in complete home renovations, with specialisation in kitchen and bathroom transformations.</p>
+              <div className="portfolio-grid">
+                <div className="portfolio-item">
+                  <img src="/kitchen-project-1.jpg" alt="Modern kitchen renovation" />
+                  <div className="portfolio-info">
+                    <h3>Contemporary Kitchen Refurbishment</h3>
+                    <p>Stunning modern kitchen with handleless cabinetry, integrated appliances, and bespoke tiling. Part of a complete home renovation project.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/bathroom-project-1.jpg" alt="Luxury bathroom renovation" />
+                  <div className="portfolio-info">
+                    <h3>Luxury Bathroom Transformation</h3>
+                    <p>Complete bathroom overhaul featuring freestanding bath, walk-in shower, and premium finishes. Expertly executed as part of our full home renovation services.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/bathroom-before-after.jpg" alt="Bathroom before and after" />
+                  <div className="portfolio-info">
+                    <h3>Complete Bathroom Refurbishment</h3>
+                    <p>Dramatic transformation from dated to contemporary, showcasing our attention to detail and quality craftsmanship in complete home renovation projects.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/kitchen-project-2.jpg" alt="Modern kitchen with marble countertops" />
+                  <div className="portfolio-info">
+                    <h3>Premium Kitchen with Marble Finishes</h3>
+                    <p>Elegant kitchen renovation featuring stunning marble countertops, black cabinetry, and sophisticated design. A showcase of luxury and functionality in complete home renovation.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/bathroom-project-2.jpg" alt="Luxury bathroom with freestanding bath" />
+                  <div className="portfolio-info">
+                    <h3>Luxury Bathroom with Premium Fixtures</h3>
+                    <p>Stunning bathroom featuring freestanding bath, rainfall shower with crystal chandelier, and premium marble tiling. Expertly designed and executed as part of our full home renovation services.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Google Reviews Section */}
+          <section className="google-reviews-section">
+            <div className="container">
+              <h2>What Our Clients Say</h2>
+              <p className="reviews-intro">Trusted by hundreds of satisfied customers across London</p>
+              
+              <div className="google-reviews-container">
+                <div className="google-rating-box">
+                  <div className="rating-header">
+                    <h3>Google Reviews</h3>
+                    <div className="rating-stars">★★★★★</div>
+                    <p className="rating-text">4.9 out of 5 stars</p>
+                  </div>
+                  <a href="https://www.google.com/search?q=BF+Construction+Solutions+LTD+London" target="_blank" rel="noopener noreferrer" className="google-reviews-link">
+                    View on Google
+                  </a>
+                </div>
+
+                <div className="reviews-grid">
+                  <div className="review-card">
+                    <div className="review-stars">★★★★★</div>
+                    <p className="review-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis - we'll reach out when we get round to tiling the fireplace if that suits"</p>
+                    <p className="review-author">Dan</p>
+                  </div>
+                  <div className="review-card">
+                    <div className="review-stars">★★★★★</div>
+                    <p className="review-text">"Morning, Yes keys arrived safe and sound. Thank you for the great work, the finishing is great, top quality. If there be anything require you to visit. And I will definitely consider your team for decorating works I plan in the spring. You too have a great day. All the best."</p>
+                    <p className="review-author">Stavros</p>
+                  </div>
+                  <div className="review-card">
+                    <div className="review-stars">★★★★★</div>
+                    <p className="review-text">"Work is ready. Key is with your cleaner. Thank you so much! Sure you did a great job"</p>
+                    <p className="review-author">Georgia Leggy</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Quick Contact CTA */}
+          <section className="quick-contact-cta">
+            <div className="container">
+              <h2>Ready to Transform Your Home?</h2>
+              <p>Contact us today for a free consultation and quotation</p>
+              <div className="quick-contact-buttons">
+                <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="contact-cta-btn whatsapp-btn-large">
+                  💬 WhatsApp: +44 (0)7865 516023
+                </a>
+                <a href="mailto:Info@bfconstruction.co.uk" className="contact-cta-btn email-btn-large">
+                  📧 Email: Info@bfconstruction.co.uk
+                </a>
+                <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer" className="contact-cta-btn instagram-btn-large">
+                  📷 Follow: @bfconstruction.uk
+                </a>
+              </div>
+            </div>
+          </section>
         </section>
       )}
 
@@ -190,11 +311,11 @@ function App() {
       {activeSection === 'about' && (
         <section className="about">
           <div className="container">
-            <h2>About BF Construction</h2>
+            <h2>About BF Construction Solutions LTD</h2>
             <div className="about-content">
               <div className="about-text">
                 <h3>London's Premier Renovation Specialists</h3>
-                <p>With over 17 years of experience, BF Construction is London's trusted name in complete home renovations, specialising in kitchen and bathroom transformations. We have established ourselves as industry leaders, transforming ordinary spaces into extraordinary homes with expert craftsmanship and innovative design.</p>
+                <p>With over 17 years of experience, BF Construction Solutions LTD is London's trusted name in complete home renovations, specialising in kitchen and bathroom transformations. We have established ourselves as industry leaders, transforming ordinary spaces into extraordinary homes with expert craftsmanship and innovative design.</p>
                 
                 <h4>Our Expertise</h4>
                 <p>We specialise in complete home renovations with particular expertise in:</p>
@@ -204,7 +325,7 @@ function App() {
                   <li><strong>Full Home Renovations:</strong> Complete house refurbishments including structural work, flooring, electrical, plumbing, and decorating.</li>
                 </ul>
                 
-                <h4>Why Choose BF Construction?</h4>
+                <h4>Why Choose BF Construction Solutions LTD?</h4>
                 <ul className="about-list">
                   <li><strong>17+ Years Experience:</strong> Proven track record of successful projects across London.</li>
                   <li><strong>Expert Craftsmanship:</strong> Our team consists of skilled professionals with extensive experience in all renovation types.</li>
@@ -227,21 +348,23 @@ function App() {
             <div className="contact-wrapper">
               <div className="contact-info">
                 <h3>Contact Details</h3>
-                <div className="info-item">
-                  <h4>WhatsApp</h4>
+                <div className="info-item highlight-whatsapp">
+                  <h4>💬 WhatsApp</h4>
                   <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer">+44 (0)7865 516023</a>
+                  <p className="contact-note">Fastest way to reach us!</p>
                 </div>
-                <div className="info-item">
-                  <h4>Email</h4>
+                <div className="info-item highlight-email">
+                  <h4>📧 Email</h4>
                   <a href="mailto:Info@bfconstruction.co.uk">Info@bfconstruction.co.uk</a>
                 </div>
-                <div className="info-item">
-                  <h4>Location</h4>
-                  <p>London, United Kingdom</p>
+                <div className="info-item highlight-instagram">
+                  <h4>📷 Instagram</h4>
+                  <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer">@bfconstruction.uk</a>
+                  <p className="contact-note">Follow us for project updates!</p>
                 </div>
                 <div className="info-item">
-                  <h4>Instagram</h4>
-                  <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer">@bfconstruction.uk</a>
+                  <h4>📍 Location</h4>
+                  <p>London, United Kingdom</p>
                 </div>
               </div>
 
@@ -318,13 +441,13 @@ function App() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-text">
-              <p>&copy; 2026 BF Construction. All rights reserved.</p>
+              <p>&copy; 2026 BF Construction Solutions LTD. All rights reserved.</p>
               <p>Complete Home Renovations | Kitchen & Bathroom Specialists | London, United Kingdom</p>
             </div>
             <div className="footer-social">
-              <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
-              <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="social-link">WhatsApp</a>
-              <a href="mailto:Info@bfconstruction.co.uk" className="social-link">Email</a>
+              <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer" className="social-link">📷 Instagram</a>
+              <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="social-link">💬 WhatsApp</a>
+              <a href="mailto:Info@bfconstruction.co.uk" className="social-link">📧 Email</a>
             </div>
           </div>
         </div>
