@@ -227,6 +227,30 @@ function App() {
                   <li>Project management</li>
                 </ul>
               </div>
+              <div className="service-card">
+                <h3>Bespoke Carpentry & Fitted Furniture</h3>
+                <p>Expertly crafted custom-made storage solutions tailored to your space:</p>
+                <ul>
+                  <li>Fitted kitchen cabinetry</li>
+                  <li>Luxury bathroom vanities</li>
+                  <li>Bespoke wardrobes and dressing rooms</li>
+                  <li>Under-stair storage solutions</li>
+                  <li>Custom shelving and display units</li>
+                  <li>Premium finishes and hardware</li>
+                </ul>
+              </div>
+              <div className="service-card">
+                <h3>Garden & Outdoor Living</h3>
+                <p>Transform your outdoor space into a stunning sanctuary:</p>
+                <ul>
+                  <li>Garden design and landscaping</li>
+                  <li>Patio and decking installation</li>
+                  <li>Summer house construction</li>
+                  <li>Outdoor kitchens and entertaining areas</li>
+                  <li>Planting and garden features</li>
+                  <li>Complete garden transformations</li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
