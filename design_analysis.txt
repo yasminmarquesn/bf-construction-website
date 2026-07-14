@@ -1,0 +1,23 @@
+# Análise de Design - Referência Silvestre Building Services
+
+## Estética e Paleta de Cores
+- **Cores Dominantes:** Branco, Cinza Muito Claro (#f5f5f5 ou similar), Preto/Cinza Escuro para texto.
+- **Tipografia:** Sans-serif limpa e moderna (provavelmente Montserrat, Open Sans ou similar). Títulos em negrito, subtítulos com bom espaçamento.
+- **Minimalismo:** Uso extensivo de whitespace (espaço em branco) para dar um ar "premium" e profissional.
+- **Acentos:** Pouco uso de cores vibrantes. O foco está nas fotos dos projetos.
+
+## Estrutura
+- **Hero:** Imagem de fundo de alta qualidade com texto centralizado ou à esquerda, tipografia grande e clara.
+- **Portfolio:** Grid limpo, sem bordas pesadas, focado na imagem.
+- **Contactos:** Informações claras, tipografia organizada, ícones minimalistas.
+- **WhatsApp:** Integrado de forma discreta, não intrusiva.
+
+## Aplicação ao BF Construction Solutions LTD
+- **Paleta de Cores:** 
+  1. Branco (#ffffff) - Fundo principal.
+  2. Cinza Escuro (#333333) - Texto principal.
+  3. Dourado Suave (#d4af37) - Apenas para acentos sutis e botões CTA.
+  4. Cinza Claro (#f9f9f9) - Fundos de seção.
+- **Remoção:** Eliminar o verde vibrante do WhatsApp e o roxo do Instagram. Usar ícones elegantes ou botões que sigam a paleta de 4 cores.
+- **Alinhamento:** Nome da empresa "BF Construction Solutions LTD" sempre alinhado e com tipografia consistente.
+- **Fotos:** Integrar as novas fotos (incluindo as colagens Before/After) com descrições curtas e profissionais.
