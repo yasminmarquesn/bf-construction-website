@@ -9,9 +9,8 @@ function App() {
     '/assets/projects/bathroom/luxury-view-2.jpg',
     '/assets/projects/bathroom/luxury-view-3.jpg',
     '/assets/projects/bathroom/luxury-view-4.jpg',
-    '/kitchen-project-1.jpg',
-    '/kitchen-project-2.jpg',
-    '/bathroom-project-1.jpg',
+    '/assets/projects/new/kitchen-new-1.jpg',
+    '/assets/projects/new/garden-new-1.jpg',
   ];
 
   const galleryImages = [
@@ -19,14 +18,12 @@ function App() {
     { src: '/assets/projects/bathroom/luxury-view-1.jpg', title: 'Luxury Bathroom Entrance Detail' },
     { src: '/assets/projects/bathroom/luxury-view-3.jpg', title: 'Premium Bathroom with Bespoke Vanity' },
     { src: '/assets/projects/bathroom/luxury-view-4.jpg', title: 'Luxury Shower & Vanity Suite' },
-    { src: '/kitchen-project-1.jpg', title: 'Contemporary Kitchen Refurbishment' },
-    { src: '/bathroom-project-1.jpg', title: 'Luxury Bathroom Transformation' },
-    { src: '/bathroom-before-after.jpg', title: 'Complete Bathroom Refurbishment' },
-    { src: '/kitchen-project-2.jpg', title: 'Modern Kitchen with Marble Countertops' },
-    { src: '/bathroom-project-2.jpg', title: 'Spa-Style Bathroom' },
-    { src: '/garden-project-1.jpg', title: 'Contemporary Garden Design' },
-    { src: '/carpentry-project-1.jpg', title: 'Bespoke Built-In Storage' },
-    { src: '/extension-project-1.jpg', title: 'Modern House Extension' },
+    { src: '/assets/projects/new/bathroom-new-1.jpg', title: 'Luxury Bathroom Transformation' },
+    { src: '/assets/projects/new/bathroom-before-after-2.png', title: 'Complete Bathroom Refurbishment' },
+    { src: '/assets/projects/new/kitchen-new-1.jpg', title: 'Modern Kitchen with Marble Countertops' },
+    { src: '/assets/projects/new/renovation-before-after-1.png', title: 'Complete Home Renovation' },
+    { src: '/assets/projects/new/garden-new-1.jpg', title: 'Contemporary Garden Design' },
+    { src: '/assets/projects/new/carpentry-new-1.png', title: 'Bespoke Built-In Storage' },
   ];
 
   // Auto-advance carousel
