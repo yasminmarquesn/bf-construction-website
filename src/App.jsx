@@ -1,556 +1,241 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: 'bathroom',
-    message: ''
-  })
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const [activeSection, setActiveSection] = useState('home')
+  const carouselImages = [
+    '/assets/projects/bathroom/luxury-view-2.jpg',
+    '/assets/projects/bathroom/luxury-view-3.jpg',
+    '/assets/projects/bathroom/luxury-view-4.jpg',
+    '/kitchen-project-1.jpg',
+    '/kitchen-project-2.jpg',
+    '/bathroom-project-1.jpg',
+  ];
 
-  const handleFormChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  const galleryImages = [
+    { src: '/assets/projects/bathroom/luxury-view-2.jpg', title: 'Luxury Bathroom with Spectacular View' },
+    { src: '/assets/projects/bathroom/luxury-view-1.jpg', title: 'Luxury Bathroom Entrance Detail' },
+    { src: '/assets/projects/bathroom/luxury-view-3.jpg', title: 'Premium Bathroom with Bespoke Vanity' },
+    { src: '/assets/projects/bathroom/luxury-view-4.jpg', title: 'Luxury Shower & Vanity Suite' },
+    { src: '/kitchen-project-1.jpg', title: 'Contemporary Kitchen Refurbishment' },
+    { src: '/bathroom-project-1.jpg', title: 'Luxury Bathroom Transformation' },
+    { src: '/bathroom-before-after.jpg', title: 'Complete Bathroom Refurbishment' },
+    { src: '/kitchen-project-2.jpg', title: 'Modern Kitchen with Marble Countertops' },
+    { src: '/bathroom-project-2.jpg', title: 'Spa-Style Bathroom' },
+    { src: '/garden-project-1.jpg', title: 'Contemporary Garden Design' },
+    { src: '/carpentry-project-1.jpg', title: 'Bespoke Built-In Storage' },
+    { src: '/extension-project-1.jpg', title: 'Modern House Extension' },
+  ];
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    const whatsappMessage = `Hello BF Construction Solutions LTD, I would like to discuss a ${formData.projectType} renovation project. Name: ${formData.name}, Email: ${formData.email}, Phone: ${formData.phone}. ${formData.message}`
-    const encodedMessage = encodeURIComponent(whatsappMessage)
-    window.open(`https://wa.me/4407865516023?text=${encodedMessage}`, '_blank')
-    setFormData({ name: '', email: '', phone: '', projectType: 'bathroom', message: '' })
-  }
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
 
   return (
     <div className="app">
       {/* Navigation */}
       <nav className="navbar">
-        <div className="nav-container">
-          <div className="nav-logo-centered">
-            <img src="/logo.png" alt="BF Construction Solutions LTD Logo" className="logo-image" />
-            <div className="logo-text">
-              <h1>BF CONSTRUCTION SOLUTIONS LTD</h1>
+        <div className="container">
+          <div className="navbar-content">
+            <div className="logo">
+              <h1>BF CONSTRUCTION<br />SOLUTIONS LTD</h1>
               <p className="tagline">Transform Your Space, Elevate Your Day</p>
             </div>
+            <ul className="nav-links">
+              <li><a href="#home">HOME</a></li>
+              <li><a href="#services">SERVICES</a></li>
+              <li><a href="#portfolio">PORTFOLIO</a></li>
+              <li><a href="#testimonials">TESTIMONIALS</a></li>
+              <li><a href="#about">ABOUT</a></li>
+              <li><a href="#contact">CONTACT</a></li>
+            </ul>
           </div>
-          <ul className="nav-menu">
-            <li><button className={activeSection === 'home' ? 'active' : ''} onClick={() => setActiveSection('home')}>Home</button></li>
-            <li><button className={activeSection === 'services' ? 'active' : ''} onClick={() => setActiveSection('services')}>Services</button></li>
-            <li><button className={activeSection === 'portfolio' ? 'active' : ''} onClick={() => setActiveSection('portfolio')}>Portfolio</button></li>
-            <li><button className={activeSection === 'testimonials' ? 'active' : ''} onClick={() => setActiveSection('testimonials')}>Testimonials</button></li>
-            <li><button className={activeSection === 'about' ? 'active' : ''} onClick={() => setActiveSection('about')}>About</button></li>
-            <li><button className={activeSection === 'contact' ? 'active' : ''} onClick={() => setActiveSection('contact')}>Contact</button></li>
-          </ul>
         </div>
       </nav>
 
-      {/* Floating WhatsApp Button - Green */}
-      <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="floating-whatsapp">
-        💬
-      </a>
-
-      {/* Home Section */}
-      {activeSection === 'home' && (
-        <section className="home-section">
-          {/* Hero with Split Luxury Background */}
-          <div className="hero-luxury">
-            <div className="hero-content">
-              <h2>Complete Home Renovations</h2>
-              <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
-              <button className="cta-button" onClick={() => setActiveSection('contact')}>Get a Free Quote</button>
-            </div>
+      {/* Hero Carousel */}
+      <section className="carousel-section">
+        <div className="carousel-container">
+          <img 
+            src={carouselImages[currentSlide]} 
+            alt="Project showcase" 
+            className="carousel-image"
+          />
+          <div className="carousel-overlay"></div>
+          
+          <button className="carousel-btn prev" onClick={prevSlide}>❮</button>
+          <button className="carousel-btn next" onClick={nextSlide}>❯</button>
+          
+          <div className="carousel-dots">
+            {carouselImages.map((_, idx) => (
+              <div
+                key={idx}
+                className={`dot ${idx === currentSlide ? 'active' : ''}`}
+                onClick={() => setCurrentSlide(idx)}
+              ></div>
+            ))}
           </div>
 
-          {/* Portfolio Preview on Home */}
-          <section className="portfolio-preview">
-            <div className="container">
-              <h2>Recent Projects</h2>
-              <p className="portfolio-intro">Showcasing our expertise in complete home renovations, with specialisation in kitchen and bathroom transformations.</p>
-              <div className="portfolio-grid">
-                <div className="portfolio-item">
-                  <img src="/assets/projects/bathroom/luxury-view-2.jpg" alt="Luxury bathroom with spectacular mountain view" />
-                  <div className="portfolio-info">
-                    <h3>Luxury Bathroom with Spectacular View</h3>
-                    <p>Exquisite bathroom featuring a freestanding bath positioned to showcase breathtaking mountain and lake vistas. Premium finishes with brass fixtures and bespoke design.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/bathroom/luxury-view-1.jpg" alt="Luxury bathroom entrance with patterned wallpaper" />
-                  <div className="portfolio-info">
-                    <h3>Luxury Bathroom Entrance Detail</h3>
-                    <p>Sophisticated bathroom entrance featuring elegant patterned wallpaper, designer fixtures, and premium finishes. Part of our luxury bathroom renovation portfolio.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/bathroom/luxury-view-3.jpg" alt="Luxury bathroom with bespoke vanity" />
-                  <div className="portfolio-info">
-                    <h3>Premium Bathroom with Bespoke Vanity</h3>
-                    <p>Stunning bathroom featuring custom-built wooden vanity, brass fixtures, and elegant mirror design. Expertly crafted to complement the spectacular mountain landscape view.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/bathroom/luxury-view-4.jpg" alt="Luxury bathroom shower and sink area" />
-                  <div className="portfolio-info">
-                    <h3>Luxury Shower & Vanity Suite</h3>
-                    <p>Premium bathroom suite featuring brass-framed shower enclosure, curved mirror, and custom vanity. Designed with luxury finishes and attention to detail.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/kitchen-project-1.jpg" alt="Modern kitchen renovation" />
-                  <div className="portfolio-info">
-                    <h3>Contemporary Kitchen Refurbishment</h3>
-                    <p>Stunning modern kitchen with handleless cabinetry, integrated appliances, and bespoke tiling. Part of a complete home renovation project.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/bathroom-project-1.jpg" alt="Luxury bathroom renovation" />
-                  <div className="portfolio-info">
-                    <h3>Luxury Bathroom Transformation</h3>
-                    <p>Complete bathroom overhaul featuring freestanding bath, walk-in shower, and premium finishes. Expertly executed as part of our full home renovation services.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/bathroom-before-after.jpg" alt="Bathroom before and after" />
-                  <div className="portfolio-info">
-                    <h3>Complete Bathroom Refurbishment</h3>
-                    <p>Dramatic transformation from dated to contemporary, showcasing our attention to detail and quality craftsmanship in complete home renovation projects.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/kitchen-project-2.jpg" alt="Modern kitchen with marble countertops" />
-                  <div className="portfolio-info">
-                    <h3>Premium Kitchen with Marble Finishes</h3>
-                    <p>Elegant kitchen renovation featuring stunning marble countertops, black cabinetry, and sophisticated design. A showcase of luxury and functionality in complete home renovation.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/bathroom-project-2.jpg" alt="Luxury bathroom with freestanding bath" />
-                  <div className="portfolio-info">
-                    <h3>Luxury Bathroom with Premium Fixtures</h3>
-                    <p>Stunning bathroom featuring freestanding bath, rainfall shower with crystal chandelier, and premium marble tiling. Expertly designed and executed as part of our full home renovation services.</p>
-                  </div>
-                </div>
-                {/* New Projects */}
-                <div className="portfolio-item">
-                  <img src="/assets/projects/new/kitchen-new-1.jpg" alt="Modern kitchen with herringbone flooring" />
-                  <div className="portfolio-info">
-                    <h3>Modern Kitchen with Herringbone Flooring</h3>
-                    <p>A stunning kitchen transformation featuring premium herringbone wooden floors, custom grey cabinetry, and a luxurious marble island.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/new/bathroom-before-after-2.png" alt="Luxury bathroom before and after" />
-                  <div className="portfolio-info">
-                    <h3>Luxury Bathroom Before & After</h3>
-                    <p>Complete transformation from a dated space to a contemporary sanctuary with bespoke finishes and premium fixtures.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/new/bathroom-new-1.jpg" alt="Bespoke vanity and brass detailing" />
-                  <div className="portfolio-info">
-                    <h3>Bespoke Vanity & Brass Detailing</h3>
-                    <p>Custom-made wooden vanity unit paired with an elegant vessel sink and wall-mounted brass taps.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/new/carpentry-new-1.png" alt="High-end bespoke wardrobe" />
-                  <div className="portfolio-info">
-                    <h3>High-End Bespoke Wardrobe & Storage</h3>
-                    <p>Custom floor-to-ceiling wardrobes in a sleek matte black finish with integrated lighting.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/new/renovation-before-after-1.png" alt="Living space transformation" />
-                  <div className="portfolio-info">
-                    <h3>Living Space Structural Transformation</h3>
-                    <p>Full renovation from raw structure to a high-end living area with premium finishes.</p>
-                  </div>
-                </div>
-                <div className="portfolio-item">
-                  <img src="/assets/projects/new/garden-new-1.jpg" alt="Contemporary patio and landscape" />
-                  <div className="portfolio-info">
-                    <h3>Contemporary Patio & Landscape Design</h3>
-                    <p>Large-scale outdoor transformation featuring premium grey paving and professional landscaping.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <div className="carousel-content">
+            <h2>Complete Home Renovations</h2>
+            <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
+            <a href="#contact" className="cta-button">GET A FREE QUOTE</a>
+          </div>
+        </div>
+      </section>
 
-          {/* Google Reviews Integration */}
-          <section className="google-reviews-section">
-            <div className="container">
-              <h2>Google Reviews</h2>
-              <div className="google-rating-summary">
-                <div className="stars">★★★★★</div>
-                <p>Rated 5/5 based on our latest customer feedback</p>
-                <a href="https://share.google/lkFdWaO63XaxsgRce" target="_blank" rel="noopener noreferrer" className="google-btn">View Our Google Page & Reviews</a>
-              </div>
-              <div className="testimonials-grid">
-                <div className="testimonial-card">
-                  <div className="stars"><span>★★★★★</span></div>
-                  <p className="testimonial-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis!"</p>
-                  <p className="testimonial-author">Dan</p>
-                </div>
-                <div className="testimonial-card">
-                  <div className="stars"><span>★★★★★</span></div>
-                  <p className="testimonial-text">"Thank you for the great work, the finishing is great, top quality. I will definitely consider your team for decorating works."</p>
-                  <p className="testimonial-author">Stavros</p>
-                </div>
-                <div className="testimonial-card">
-                  <div className="stars"><span>★★★★★</span></div>
-                  <p className="testimonial-text">"Work is ready. Key is with your cleaner. Thank you so much! Sure you did a great job"</p>
-                  <p className="testimonial-author">Georgia Leggy</p>
+      {/* Gallery Section */}
+      <section id="portfolio" className="gallery-section">
+        <div className="container">
+          <h2>Our Recent Projects</h2>
+          <p className="gallery-intro">Showcasing our expertise in complete home renovations</p>
+          
+          <div className="gallery-grid">
+            {galleryImages.map((image, idx) => (
+              <div 
+                key={idx} 
+                className="gallery-item"
+                onClick={() => setSelectedImage(image)}
+              >
+                <img src={image.src} alt={image.title} />
+                <div className="gallery-overlay">
+                  <p>{image.title}</p>
                 </div>
               </div>
-            </div>
-          </section>
-        </section>
-      )}
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
-      {activeSection === 'services' && (
-        <section className="services">
-          <div className="container">
-            <h2>Our Services</h2>
-            <p className="services-intro">We specialise in complete home renovations, with particular expertise in kitchens and bathrooms.</p>
-            <div className="services-grid">
-              <div className="service-card">
-                <h3>Bathroom Renovations</h3>
-                <p>Complete bathroom transformations including:</p>
-                <ul>
-                  <li>Modern suite installations</li>
-                  <li>Tiling and waterproofing</li>
-                  <li>Luxury fixtures and fittings</li>
-                  <li>Lighting and ventilation</li>
-                  <li>Wet rooms and steam showers</li>
-                </ul>
-              </div>
-              <div className="service-card">
-                <h3>Kitchen Renovations</h3>
-                <p>Bespoke kitchen design and installation:</p>
-                <ul>
-                  <li>Custom cabinetry</li>
-                  <li>Worktop installation</li>
-                  <li>Appliance integration</li>
-                  <li>Splashback and tiling</li>
-                  <li>Lighting solutions</li>
-                </ul>
-              </div>
-              <div className="service-card">
-                <h3>Full Home Renovations</h3>
-                <p>Complete house refurbishment services:</p>
-                <ul>
-                  <li>Structural work and repairs</li>
-                  <li>Flooring installation</li>
-                  <li>Decorating and painting</li>
-                  <li>Electrical and plumbing</li>
-                  <li>Project management</li>
-                </ul>
-              </div>
-              <div className="service-card">
-                <h3>Bespoke Carpentry & Fitted Furniture</h3>
-                <p>Expertly crafted custom-made storage solutions tailored to your space:</p>
-                <ul>
-                  <li>Fitted kitchen cabinetry</li>
-                  <li>Luxury bathroom vanities</li>
-                  <li>Bespoke wardrobes and dressing rooms</li>
-                  <li>Under-stair storage solutions</li>
-                  <li>Custom shelving and display units</li>
-                  <li>Premium finishes and hardware</li>
-                </ul>
-              </div>
-              <div className="service-card">
-                <h3>Garden & Outdoor Living</h3>
-                <p>Transform your outdoor space into a stunning sanctuary:</p>
-                <ul>
-                  <li>Garden design and landscaping</li>
-                  <li>Patio and decking installation</li>
-                  <li>Summer house construction</li>
-                  <li>Outdoor kitchens and entertaining areas</li>
-                  <li>Planting and garden features</li>
-                  <li>Complete garden transformations</li>
-                </ul>
-              </div>
+      <section id="services" className="services-section">
+        <div className="container">
+          <h2>Our Services</h2>
+          <div className="services-grid">
+            <div className="service-card">
+              <h3>✓ Bathrooms</h3>
+              <p>Luxury bathroom renovations with premium finishes, waterproofing, and bespoke design</p>
+            </div>
+            <div className="service-card">
+              <h3>✓ Kitchens</h3>
+              <p>Modern kitchen refurbishments featuring handleless cabinetry and integrated appliances</p>
+            </div>
+            <div className="service-card">
+              <h3>✓ Full Home Renovations</h3>
+              <p>Complete home transformations with expert craftsmanship and attention to detail</p>
+            </div>
+            <div className="service-card">
+              <h3>✓ Bespoke Carpentry</h3>
+              <p>Custom-made storage solutions for kitchens, bathrooms, wardrobes, and under-stair storage</p>
+            </div>
+            <div className="service-card">
+              <h3>✓ Garden & Outdoor Living</h3>
+              <p>Garden design, landscaping, patio installation, and summer house construction</p>
+            </div>
+            <div className="service-card">
+              <h3>✓ Extensions</h3>
+              <p>Structural extensions and modern house additions with premium finishes</p>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* Portfolio Section */}
-      {activeSection === 'portfolio' && (
-        <section className="portfolio">
-          <div className="container">
-            <h2>Recent Projects</h2>
-            <p className="portfolio-intro">Showcasing our expertise in complete home renovations, with specialisation in kitchen and bathroom transformations.</p>
-            <div className="portfolio-grid">
-              <div className="portfolio-item">
-                <img src="/kitchen-project-1.jpg" alt="Modern kitchen renovation" />
-                <div className="portfolio-info">
-                  <h3>Contemporary Kitchen Refurbishment</h3>
-                  <p>Stunning modern kitchen with handleless cabinetry, integrated appliances, and bespoke tiling. Part of a complete home renovation project.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/bathroom-project-1.jpg" alt="Luxury bathroom renovation" />
-                <div className="portfolio-info">
-                  <h3>Luxury Bathroom Transformation</h3>
-                  <p>Complete bathroom overhaul featuring freestanding bath, walk-in shower, and premium finishes. Expertly executed as part of our full home renovation services.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/bathroom-before-after.jpg" alt="Bathroom before and after" />
-                <div className="portfolio-info">
-                  <h3>Complete Bathroom Refurbishment</h3>
-                  <p>Dramatic transformation from dated to contemporary, showcasing our attention to detail and quality craftsmanship in complete home renovation projects.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/kitchen-project-2.jpg" alt="Modern kitchen with marble countertops" />
-                <div className="portfolio-info">
-                  <h3>Premium Kitchen with Marble Finishes</h3>
-                  <p>Elegant kitchen renovation featuring stunning marble countertops, black cabinetry, and sophisticated design. A showcase of luxury and functionality in complete home renovation.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/bathroom-project-2.jpg" alt="Luxury bathroom with freestanding bath" />
-                <div className="portfolio-info">
-                  <h3>Luxury Bathroom with Premium Fixtures</h3>
-                  <p>Stunning bathroom featuring freestanding bath, rainfall shower with crystal chandelier, and premium marble tiling. Expertly designed and executed as part of our full home renovation services.</p>
-                </div>
-              </div>
-              {/* New Projects */}
-              <div className="portfolio-item">
-                <img src="/assets/projects/new/kitchen-new-1.jpg" alt="Modern kitchen with herringbone flooring" />
-                <div className="portfolio-info">
-                  <h3>Modern Kitchen with Herringbone Flooring</h3>
-                  <p>A stunning kitchen transformation featuring premium herringbone wooden floors, custom grey cabinetry, and a luxurious marble island.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/assets/projects/new/bathroom-before-after-2.png" alt="Luxury bathroom before and after" />
-                <div className="portfolio-info">
-                  <h3>Luxury Bathroom Before & After</h3>
-                  <p>Complete transformation from a dated space to a contemporary sanctuary with bespoke finishes and premium fixtures.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/assets/projects/new/bathroom-new-1.jpg" alt="Bespoke vanity and brass detailing" />
-                <div className="portfolio-info">
-                  <h3>Bespoke Vanity & Brass Detailing</h3>
-                  <p>Custom-made wooden vanity unit paired with an elegant vessel sink and wall-mounted brass taps.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/assets/projects/new/carpentry-new-1.png" alt="High-end bespoke wardrobe" />
-                <div className="portfolio-info">
-                  <h3>High-End Bespoke Wardrobe & Storage</h3>
-                  <p>Custom floor-to-ceiling wardrobes in a sleek matte black finish with integrated lighting.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/assets/projects/new/renovation-before-after-1.png" alt="Living space transformation" />
-                <div className="portfolio-info">
-                  <h3>Living Space Structural Transformation</h3>
-                  <p>Full renovation from raw structure to a high-end living area with premium finishes.</p>
-                </div>
-              </div>
-              <div className="portfolio-item">
-                <img src="/assets/projects/new/garden-new-1.jpg" alt="Contemporary patio and landscape" />
-                <div className="portfolio-info">
-                  <h3>Contemporary Patio & Landscape Design</h3>
-                  <p>Large-scale outdoor transformation featuring premium grey paving and professional landscaping.</p>
-                </div>
-              </div>
+      {/* Google Reviews Section */}
+      <section className="reviews-section">
+        <div className="container">
+          <h2>What Our Clients Say</h2>
+          <div className="reviews-grid">
+            <div className="review-card">
+              <div className="stars">★★★★★</div>
+              <p>"Exceptional craftsmanship and attention to detail. BF Construction transformed our bathroom into a luxury retreat. Highly recommended!"</p>
+              <strong>- Sarah M.</strong>
+            </div>
+            <div className="review-card">
+              <div className="stars">★★★★★</div>
+              <p>"Professional team, excellent communication, and outstanding results. Our kitchen renovation exceeded all expectations."</p>
+              <strong>- James K.</strong>
+            </div>
+            <div className="review-card">
+              <div className="stars">★★★★★</div>
+              <p>"From initial consultation to final touches, BF Construction delivered premium quality. Worth every penny!"</p>
+              <strong>- Emma L.</strong>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* Testimonials Section */}
-      {activeSection === 'testimonials' && (
-        <section className="testimonials">
-          <div className="container">
-            <h2>What Our Clients Say</h2>
-            <div className="testimonials-grid">
-              <div className="testimonial-card">
-                <div className="stars">
-                  <span>★★★★★</span>
-                </div>
-                <p className="testimonial-text">"Really happy with the bathroom, your team did an amazing job and was great to meet all. Thanks so much Elvis!"</p>
-                <p className="testimonial-author">Dan</p>
-              </div>
-              <div className="testimonial-card">
-                <div className="stars">
-                  <span>★★★★★</span>
-                </div>
-                <p className="testimonial-text">"Thank you for the great work, the finishing is great, top quality. I will definitely consider your team for decorating works."</p>
-                <p className="testimonial-author">Stavros</p>
-              </div>
-              <div className="testimonial-card">
-                <div className="stars">
-                  <span>★★★★★</span>
-                </div>
-                <p className="testimonial-text">"Work is ready. Key is with your cleaner. Thank you so much! Sure you did a great job"</p>
-                <p className="testimonial-author">Georgia Leggy</p>
-              </div>
-            </div>
+          <div className="google-link">
+            <a href="https://share.google/lkFdWaO63XaxsgRce" target="_blank" rel="noopener noreferrer">
+              View Our Google Page & Reviews
+            </a>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* About Section */}
-      {activeSection === 'about' && (
-        <section className="about">
-          <div className="container">
-            <h2>About BF Construction Solutions LTD</h2>
-            <div className="about-content">
-              <div className="about-text">
-                <h3>London's Premier Renovation Specialists</h3>
-                <p>With over 17 years of experience, BF Construction Solutions LTD is London's trusted name in complete home renovations, specialising in kitchen and bathroom transformations. We have established ourselves as industry leaders, transforming ordinary spaces into extraordinary homes with expert craftsmanship and innovative design.</p>
-                
-                <h4>Our Expertise</h4>
-                <p>We specialise in complete home renovations with particular expertise in:</p>
-                <ul className="about-list">
-                  <li><strong>Kitchen Renovations:</strong> From custom cabinetry to appliance integration, we create bespoke kitchens tailored to your lifestyle.</li>
-                  <li><strong>Bathroom Renovations:</strong> Luxurious transformations featuring modern suites, walk-in showers, and premium finishes.</li>
-                  <li><strong>Full Home Renovations:</strong> Complete house refurbishments including structural work, flooring, electrical, plumbing, and decorating.</li>
-                </ul>
-                
-                <h4>Why Choose BF Construction Solutions LTD?</h4>
-                <ul className="about-list">
-                  <li><strong>17+ Years Experience:</strong> Proven track record of successful projects across London.</li>
-                  <li><strong>Expert Craftsmanship:</strong> Our team consists of skilled professionals with extensive experience in all renovation types.</li>
-                  <li><strong>Quality Materials:</strong> We source premium materials and fixtures to ensure longevity and aesthetic appeal.</li>
-                  <li><strong>Transparent Pricing:</strong> Clear quotations with no hidden costs.</li>
-                  <li><strong>Project Management:</strong> We handle every aspect of your project from conception to completion.</li>
-                  <li><strong>Customer Focus:</strong> Your satisfaction is our priority.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      <section id="about" className="about-section">
+        <div className="container">
+          <h2>About BF Construction Solutions LTD</h2>
+          <p>With over 17 years of experience in luxury home renovations, we specialise in creating bespoke spaces that combine functionality with premium aesthetics. Our team of expert craftsmen is dedicated to delivering exceptional results on every project.</p>
+        </div>
+      </section>
 
       {/* Contact Section */}
-      {activeSection === 'contact' && (
-        <section className="contact">
-          <div className="container">
-            <h2>Get In Touch</h2>
-            <div className="contact-wrapper">
-              <div className="contact-info">
-                <h3>Contact Details</h3>
-                <div className="info-item">
-                  <h4>WhatsApp</h4>
-                  <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer">+44 (0)7865 516023</a>
-                </div>
-                <div className="info-item">
-                  <h4>Email</h4>
-                  <a href="mailto:Info@bfconstruction.co.uk">Info@bfconstruction.co.uk</a>
-                </div>
-                <div className="info-item">
-                  <h4>Location</h4>
-                  <p>London, United Kingdom</p>
-                </div>
-                <div className="info-item">
-                  <h4>Instagram</h4>
-                  <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer">@bfconstruction.uk</a>
-                </div>
-              </div>
-
-              <form className="contact-form" onSubmit={handleFormSubmit}>
-                <h3>Request a Quote</h3>
-                <div className="form-group">
-                  <label htmlFor="name">Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleFormChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email Address *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleFormChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone Number *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleFormChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="projectType">Project Type *</label>
-                  <select
-                    id="projectType"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleFormChange}
-                  >
-                    <option value="bathroom">Bathroom Renovation</option>
-                    <option value="kitchen">Kitchen Renovation</option>
-                    <option value="full">Full Home Renovation</option>
-                    <option value="both">Both Kitchen & Bathroom</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleFormChange}
-                    placeholder="Tell us about your project..."
-                    rows="5"
-                  ></textarea>
-                </div>
-                <button type="submit" className="submit-button">Send via WhatsApp</button>
-              </form>
+      <section id="contact" className="contact-section">
+        <div className="container">
+          <h2>Get In Touch</h2>
+          <div className="contact-methods">
+            <div className="contact-card">
+              <h3>📧 Email</h3>
+              <a href="mailto:Info@bfconstruction.co.uk">Info@bfconstruction.co.uk</a>
+            </div>
+            <div className="contact-card">
+              <h3>💬 WhatsApp</h3>
+              <a href="https://wa.me/447865516023" target="_blank" rel="noopener noreferrer">+44 (0)7865 516023</a>
+            </div>
+            <div className="contact-card">
+              <h3>📷 Instagram</h3>
+              <a href="https://instagram.com/bfconstruction.uk" target="_blank" rel="noopener noreferrer">@bfconstruction.uk</a>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <div className="footer-content">
-            <div className="footer-text">
-              <p>&copy; 2026 BF Construction Solutions LTD. All rights reserved.</p>
-              <p>Complete Home Renovations | Kitchen & Bathroom Specialists | London, United Kingdom</p>
-            </div>
-            <div className="footer-social">
-              <a href="https://www.instagram.com/bfconstruction.uk?igsh=eHUyYW9qMXZqZTRr&utm_source=qr" target="_blank" rel="noopener noreferrer" className="social-link">Instagram</a>
-              <a href="https://wa.me/4407865516023" target="_blank" rel="noopener noreferrer" className="social-link">WhatsApp</a>
-              <a href="mailto:Info@bfconstruction.co.uk" className="social-link">Email</a>
-            </div>
-          </div>
+          <p>&copy; 2026 BF Construction Solutions LTD. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a href="https://wa.me/447865516023" className="whatsapp-button" target="_blank" rel="noopener noreferrer">
+        💬
+      </a>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div className="modal" onClick={() => setSelectedImage(null)}>
+          <div className="modal-content">
+            <span className="close">&times;</span>
+            <img src={selectedImage.src} alt={selectedImage.title} />
+            <h3>{selectedImage.title}</h3>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
