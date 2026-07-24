@@ -75,6 +75,34 @@ function App() {
               <p className="portfolio-intro">Showcasing our expertise in complete home renovations, with specialisation in kitchen and bathroom transformations.</p>
               <div className="portfolio-grid">
                 <div className="portfolio-item">
+                  <img src="/assets/projects/bathroom/luxury-view-2.jpg" alt="Luxury bathroom with spectacular mountain view" />
+                  <div className="portfolio-info">
+                    <h3>Luxury Bathroom with Spectacular View</h3>
+                    <p>Exquisite bathroom featuring a freestanding bath positioned to showcase breathtaking mountain and lake vistas. Premium finishes with brass fixtures and bespoke design.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/assets/projects/bathroom/luxury-view-1.jpg" alt="Luxury bathroom entrance with patterned wallpaper" />
+                  <div className="portfolio-info">
+                    <h3>Luxury Bathroom Entrance Detail</h3>
+                    <p>Sophisticated bathroom entrance featuring elegant patterned wallpaper, designer fixtures, and premium finishes. Part of our luxury bathroom renovation portfolio.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/assets/projects/bathroom/luxury-view-3.jpg" alt="Luxury bathroom with bespoke vanity" />
+                  <div className="portfolio-info">
+                    <h3>Premium Bathroom with Bespoke Vanity</h3>
+                    <p>Stunning bathroom featuring custom-built wooden vanity, brass fixtures, and elegant mirror design. Expertly crafted to complement the spectacular mountain landscape view.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
+                  <img src="/assets/projects/bathroom/luxury-view-4.jpg" alt="Luxury bathroom shower and sink area" />
+                  <div className="portfolio-info">
+                    <h3>Luxury Shower & Vanity Suite</h3>
+                    <p>Premium bathroom suite featuring brass-framed shower enclosure, curved mirror, and custom vanity. Designed with luxury finishes and attention to detail.</p>
+                  </div>
+                </div>
+                <div className="portfolio-item">
                   <img src="/kitchen-project-1.jpg" alt="Modern kitchen renovation" />
                   <div className="portfolio-info">
                     <h3>Contemporary Kitchen Refurbishment</h3>
