@@ -69,8 +69,14 @@ function App() {
     { id: 102, category: 'Kitchens', src: '/kitchen-project-2.jpg', title: 'Modern Marble Kitchen' },
     { id: 103, category: 'Bathrooms', src: '/bathroom-project-1.jpg', title: 'Classic Bathroom' },
     { id: 104, category: 'Bathrooms', src: '/bathroom-project-2.jpg', title: 'Spa-Style Retreat' },
-    { id: 105, category: 'Clinic', src: '/assets/projects/new/renovation-before-after-1.png', title: 'Medical Clinic Renovation' },
+    { id: 105, category: 'Renovations', src: '/assets/projects/new/renovation-before-after-1.png', title: 'Full Home Renovation Before & After' },
     
+    // Clinic transformation — original garage converted into treatment space
+    { id: 601, category: 'Clinic', isSlider: true, before: '/assets/projects/clinic/before/clinic-garage-before-1.jpeg', after: '/assets/projects/clinic/after/clinic-treatment-room-1.jpeg', title: 'Clinic Transformation — Garage to Treatment Space' },
+    { id: 602, category: 'Clinic', src: '/assets/projects/clinic/after/clinic-treatment-room-2.jpeg', title: 'Bespoke Clinic Storage & Treatment Room' },
+    { id: 603, category: 'Clinic', src: '/assets/projects/clinic/before/clinic-garage-before-2.jpg', title: 'Original Garage Space — Before' },
+    { id: 604, category: 'Clinic', src: '/assets/projects/clinic/before/clinic-garage-before-3.jpeg', title: 'Garage Conversion — Before' },
+
     // Transformations (Slider Ready)
     { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
     { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.png', title: 'Pink Bathroom Transformation' },
