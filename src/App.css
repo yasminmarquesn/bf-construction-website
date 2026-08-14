@@ -692,3 +692,207 @@ body, html {
   overflow-x: hidden;
   width: 100%;
 }
+
+/* ===== FREE QUOTE FORM ===== */
+.quote-section {
+  background: #111111;
+  border-top: 1px solid var(--white-outline);
+}
+
+.quote-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  gap: 80px;
+  align-items: start;
+}
+
+.quote-intro {
+  max-width: 650px;
+}
+
+.quote-intro .main-title {
+  margin-bottom: 25px;
+}
+
+.quote-intro > p {
+  color: var(--text-gray);
+  font-size: 1.05rem;
+  max-width: 560px;
+}
+
+.quote-note {
+  margin-top: 22px;
+  padding-left: 18px;
+  border-left: 2px solid var(--gold);
+  font-size: 0.9rem !important;
+}
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 35px;
+  background: var(--bg-card);
+  border: 1px solid var(--white-outline);
+}
+
+.quote-form label {
+  margin-top: 10px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 0;
+  background: #101010;
+  color: var(--text-white);
+  padding: 14px 15px;
+  font: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.quote-form input::placeholder,
+.quote-form textarea::placeholder {
+  color: #777777;
+}
+
+.quote-form select {
+  appearance: auto;
+}
+
+.quote-form input:focus,
+.quote-form select:focus,
+.quote-form textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.14);
+}
+
+.quote-form textarea {
+  resize: vertical;
+  min-height: 125px;
+}
+
+.quote-submit {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+  .quote-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .quote-form {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .quote-form input,
+  .quote-form select,
+  .quote-form textarea {
+    font-size: 16px;
+  }
+}
+
+.service-area {
+  color: var(--text-gray);
+  margin-top: 8px;
+}
+
+/* Keep the first hero frame stable and visible on mobile. */
+@media (max-width: 768px) {
+  .hero-visual,
+  .carousel-wrapper,
+  .slide {
+    min-height: 680px;
+    height: 100svh;
+  }
+
+  .slide {
+    background-position: center center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(2.1rem, 11vw, 2.8rem);
+  }
+
+  .company-name {
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+
+  .company-suffix {
+    letter-spacing: 2px;
+  }
+}
+
+/* Allow keyboard users to see the active control clearly. */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.ba-container {
+  touch-action: none;
+}
+
+.ba-before {
+  overflow: hidden;
+}
+
+.ba-before::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 2px;
+  height: 100%;
+  background: var(--gold);
+}
+
+.ba-before,
+.ba-after {
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  .ba-container {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 480px) {
+  .ba-label {
+    top: 12px;
+    padding: 4px 8px;
+    font-size: 0.6rem;
+  }
+
+  .ba-label.before { left: 12px; }
+  .ba-label.after { right: 12px; }
+  .ba-title-overlay {
+    left: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    font-size: 0.68rem;
+  }
+}

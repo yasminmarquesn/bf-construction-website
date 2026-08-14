@@ -36,9 +36,9 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const carouselImages = [
+    '/assets/projects/bathroom/luxury-view-2.jpg',
     '/assets/projects/bathroom/pink-suite/pink-bathroom-1.jpeg',
     '/assets/projects/bathroom/marble-suite/marble-bathroom-1.jpeg',
-    '/assets/projects/bathroom/luxury-view-2.jpg',
     '/assets/projects/bathroom/luxury-view-3.jpg',
     '/assets/projects/bathroom/luxury-view-4.jpg',
     '/assets/projects/new/kitchen-new-1.jpg',
@@ -100,6 +100,24 @@ function App() {
     }, 5000);
     return () => clearInterval(interval);
   }, [carouselImages.length]);
+
+  const handleQuoteSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get('name');
+    const phone = formData.get('phone');
+    const projectType = formData.get('projectType');
+    const message = formData.get('message');
+    const whatsappText = [
+      'Hello BF Construction Solutions LTD, I would like to request a free quote.',
+      '',
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Project type: ${projectType}`,
+      `Project details: ${message || 'Not provided'}`,
+    ].join('\\n');
+    window.open(`https://wa.me/447865516023?text=${encodeURIComponent(whatsappText)}`, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="app-dark">
@@ -312,8 +330,43 @@ function App() {
         </div>
       </section>
 
+      {/* Free Quote Section */}
+      <section id="contact" className="quote-section">
+        <div className="container quote-layout">
+          <div className="quote-intro">
+            <span className="sub-title">START YOUR PROJECT</span>
+            <h2 className="main-title">REQUEST A FREE QUOTE</h2>
+            <p>Tell us about your project and our team will be happy to discuss your ideas, answer your questions and arrange the next step.</p>
+            <p className="quote-note">Your details will be prepared in a WhatsApp message so you can speak directly with BF Construction Solutions LTD.</p>
+          </div>
+          <form className="quote-form" onSubmit={handleQuoteSubmit}>
+            <label htmlFor="quote-name">Your name</label>
+            <input id="quote-name" name="name" type="text" placeholder="Full name" required />
+
+            <label htmlFor="quote-phone">Phone number</label>
+            <input id="quote-phone" name="phone" type="tel" placeholder="Your phone number" required />
+
+            <label htmlFor="quote-project">Project type</label>
+            <select id="quote-project" name="projectType" defaultValue="Bathrooms" required>
+              <option>Bathrooms</option>
+              <option>Kitchens</option>
+              <option>Full Home Renovation</option>
+              <option>Bespoke Carpentry</option>
+              <option>Garden & Outdoor Living</option>
+              <option>Laundry Room</option>
+              <option>Other</option>
+            </select>
+
+            <label htmlFor="quote-message">Tell us about your project</label>
+            <textarea id="quote-message" name="message" rows="5" placeholder="What would you like us to build or renovate?" required></textarea>
+
+            <button type="submit" className="btn-gold quote-submit">SEND VIA WHATSAPP</button>
+          </form>
+        </div>
+      </section>
+
       {/* Contact Footer */}
-      <footer id="contact" className="footer-premium">
+      <footer id="footer-contact" className="footer-premium">
         <div className="container">
           <div className="footer-grid">
             <div className="footer-info">
