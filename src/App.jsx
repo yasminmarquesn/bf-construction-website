@@ -1,9 +1,39 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+
+const BeforeAfterSlider = ({ before, after, title }) => {
+  const [sliderPos, setSliderPos] = useState(50);
+  const containerRef = useRef(null);
+
+  const handleMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+    const pos = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPos(pos);
+  };
+
+  return (
+    <div className="ba-container" ref={containerRef} onMouseMove={handleMove} onTouchMove={handleMove}>
+      <div className="ba-after" style={{ backgroundImage: `url(${after})` }}></div>
+      <div className="ba-before" style={{ backgroundImage: `url(${before})`, width: `${sliderPos}%` }}>
+        <span className="ba-label before">BEFORE</span>
+      </div>
+      <div className="ba-after-label">
+        <span className="ba-label after">AFTER</span>
+      </div>
+      <div className="ba-handle" style={{ left: `${sliderPos}%` }}>
+        <div className="ba-arrow left"></div>
+        <div className="ba-arrow right"></div>
+      </div>
+      <div className="ba-title-overlay">{title}</div>
+    </div>
+  );
+};
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('All');
 
   const carouselImages = [
     '/assets/projects/bathroom/luxury-view-2.jpg',
@@ -13,18 +43,36 @@ function App() {
     '/assets/projects/new/garden-new-1.jpg',
   ];
 
-  const galleryImages = [
-    { src: '/assets/projects/bathroom/luxury-view-2.jpg', title: 'Luxury Bathroom with Spectacular View' },
-    { src: '/assets/projects/bathroom/luxury-view-1.jpg', title: 'Luxury Bathroom Entrance Detail' },
-    { src: '/assets/projects/bathroom/luxury-view-3.jpg', title: 'Premium Bathroom with Bespoke Vanity' },
-    { src: '/assets/projects/bathroom/luxury-view-4.jpg', title: 'Luxury Shower & Vanity Suite' },
-    { src: '/assets/projects/new/bathroom-new-1.jpg', title: 'Luxury Bathroom Transformation' },
-    { src: '/assets/projects/new/bathroom-before-after-2.png', title: 'Complete Bathroom Refurbishment' },
-    { src: '/assets/projects/new/kitchen-new-1.jpg', title: 'Modern Kitchen with Marble Countertops' },
-    { src: '/assets/projects/new/renovation-before-after-1.png', title: 'Complete Home Renovation' },
-    { src: '/assets/projects/new/garden-new-1.jpg', title: 'Contemporary Garden Design' },
-    { src: '/assets/projects/new/carpentry-new-1.png', title: 'Bespoke Built-In Storage' },
+  const categories = ['All', 'Bathrooms', 'Kitchens', 'Renovations', 'Gardens', 'Carpentry', 'Clinic'];
+
+  const projects = [
+    // New Luxury Bathroom
+    { id: 1, category: 'Bathrooms', src: '/assets/projects/bathroom/luxury-view-2.jpg', title: 'Luxury Lake View Suite' },
+    { id: 2, category: 'Bathrooms', src: '/assets/projects/bathroom/luxury-view-1.jpg', title: 'Designer Entrance' },
+    { id: 3, category: 'Bathrooms', src: '/assets/projects/bathroom/luxury-view-3.jpg', title: 'Bespoke Vanity Detail' },
+    { id: 4, category: 'Bathrooms', src: '/assets/projects/bathroom/luxury-view-4.jpg', title: 'Premium Shower Suite' },
+    
+    // Original Projects (Restored)
+    { id: 101, category: 'Kitchens', src: '/kitchen-project-1.jpg', title: 'Contemporary Kitchen' },
+    { id: 102, category: 'Kitchens', src: '/kitchen-project-2.jpg', title: 'Modern Marble Kitchen' },
+    { id: 103, category: 'Bathrooms', src: '/bathroom-project-1.jpg', title: 'Classic Bathroom' },
+    { id: 104, category: 'Bathrooms', src: '/bathroom-project-2.jpg', title: 'Spa-Style Retreat' },
+    { id: 105, category: 'Clinic', src: '/assets/projects/new/renovation-before-after-1.png', title: 'Medical Clinic Renovation' },
+    
+    // Transformations (Slider Ready)
+    { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
+    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/transform/bathroom-after.jpg', title: 'Complete Bathroom Refurb' },
+    
+    // Other New Projects
+    { id: 301, category: 'Kitchens', src: '/assets/projects/new/kitchen-new-1.jpg', title: 'Modern Herringbone Kitchen' },
+    { id: 302, category: 'Gardens', src: '/assets/projects/new/garden-new-1.jpg', title: 'Contemporary Garden' },
+    { id: 303, category: 'Carpentry', src: '/assets/projects/new/carpentry-new-1.png', title: 'Custom Wardrobe' },
+    { id: 304, category: 'Bathrooms', src: '/assets/projects/new/bathroom-new-1.jpg', title: 'Luxury Bath Detail' },
   ];
+
+  const filteredProjects = activeCategory === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === activeCategory);
 
   // Auto-advance carousel
   useEffect(() => {
@@ -32,85 +80,112 @@ function App() {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
+  }, [carouselImages.length]);
 
   return (
-    <div className="app">
-      {/* Navigation */}
-      <nav className="navbar">
-        <div className="container">
-          <div className="navbar-content">
-            <div className="logo">
-              <h1>BF CONSTRUCTION<br />SOLUTIONS LTD</h1>
-              <p className="tagline">Transform Your Space, Elevate Your Day</p>
-            </div>
-            <ul className="nav-links">
-              <li><a href="#home">HOME</a></li>
-              <li><a href="#services">SERVICES</a></li>
-              <li><a href="#portfolio">PORTFOLIO</a></li>
-              <li><a href="#testimonials">TESTIMONIALS</a></li>
-              <li><a href="#about">ABOUT</a></li>
-              <li><a href="#contact">CONTACT</a></li>
-            </ul>
+    <div className="app-dark">
+      {/* Header */}
+      <header className="header-premium">
+        <div className="header-container">
+          <div className="logo-section">
+            <h1 className="company-name">BF CONSTRUCTION</h1>
+            <span className="company-suffix">SOLUTIONS LTD</span>
+          </div>
+          
+          <nav className="nav-desktop">
+            <a href="#work">WORK</a>
+            <a href="#services">SERVICES</a>
+            <a href="#process">PROCESS</a>
+            <a href="#reviews">REVIEWS</a>
+          </nav>
+
+          <div className="header-contact">
+            <a href="tel:447865516023" className="phone-link">+44 (0)7865 516023</a>
+            <a href="#contact" className="btn-gold-outline">FREE QUOTE</a>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Hero Carousel */}
-      <section className="carousel-section">
-        <div className="carousel-container">
-          <img 
-            src={carouselImages[currentSlide]} 
-            alt="Project showcase" 
-            className="carousel-image"
-          />
-          <div className="carousel-overlay"></div>
-          
-          <button className="carousel-btn prev" onClick={prevSlide}>❮</button>
-          <button className="carousel-btn next" onClick={nextSlide}>❯</button>
-          
-          <div className="carousel-dots">
-            {carouselImages.map((_, idx) => (
-              <div
-                key={idx}
-                className={`dot ${idx === currentSlide ? 'active' : ''}`}
-                onClick={() => setCurrentSlide(idx)}
-              ></div>
-            ))}
+      {/* Hero Section with Carousel */}
+      <section className="hero-visual">
+        <div className="carousel-wrapper">
+          {carouselImages.map((img, idx) => (
+            <div 
+              key={idx} 
+              className={`slide ${idx === currentSlide ? 'active' : ''}`}
+              style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url(${img})` }}
+            >
+              <div className="hero-text-overlay">
+                <h2 className="hero-title">BUILT ONCE.<br/>BUILT PROPERLY.</h2>
+                <div className="hero-actions">
+                  <a href="#work" className="btn-gold">VIEW OUR WORK</a>
+                  <a href="#contact" className="btn-white-outline">GET IN TOUCH</a>
+                </div>
+                <div className="hero-trust">
+                  <div className="trust-item">
+                    <span className="gold-text">4.9/5</span> Google Rating
+                  </div>
+                  <div className="trust-divider"></div>
+                  <div className="trust-item">
+                    <span className="gold-text">10 YEAR</span> Guarantee
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Transformations Section (Sliders) */}
+      <section id="transformations" className="transform-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="sub-title">TRANSFORMATIONS</span>
+            <h2 className="main-title">BEFORE & AFTER</h2>
           </div>
-
-          <div className="carousel-content">
-            <h2>Complete Home Renovations</h2>
-            <p>Specialising in Kitchen & Bathroom Renovations | 17+ Years of Expert Craftsmanship</p>
-            <a href="#contact" className="cta-button">GET A FREE QUOTE</a>
+          
+          <div className="slider-grid">
+            {projects.filter(p => p.isSlider).map(project => (
+              <BeforeAfterSlider 
+                key={project.id} 
+                before={project.before} 
+                after={project.after} 
+                title={project.title} 
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section id="portfolio" className="gallery-section">
+      {/* Work Section (Gallery) */}
+      <section id="work" className="work-section">
         <div className="container">
-          <h2>Our Recent Projects</h2>
-          <p className="gallery-intro">Showcasing our expertise in complete home renovations</p>
-          
-          <div className="gallery-grid">
-            {galleryImages.map((image, idx) => (
-              <div 
-                key={idx} 
-                className="gallery-item"
-                onClick={() => setSelectedImage(image)}
+          <div className="section-header">
+            <span className="sub-title">PORTFOLIO</span>
+            <h2 className="main-title">OUR RECENT WORK</h2>
+          </div>
+
+          <div className="category-filter">
+            {categories.map(cat => (
+              <button 
+                key={cat} 
+                className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
               >
-                <img src={image.src} alt={image.title} />
-                <div className="gallery-overlay">
-                  <p>{image.title}</p>
+                {cat.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <div className="projects-grid">
+            {filteredProjects.filter(p => !p.isSlider).map(project => (
+              <div key={project.id} className="project-card">
+                <div className="project-media">
+                  <img src={project.src} alt={project.title} />
+                </div>
+                <div className="project-hover-info">
+                  <h3>{project.title}</h3>
+                  <span className="project-cat">{project.category}</span>
                 </div>
               </div>
             ))}
@@ -119,118 +194,145 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="services-section">
+      <section id="services" className="trades-section">
         <div className="container">
-          <h2>Our Services</h2>
-          <div className="services-grid">
-            <div className="service-card">
-              <h3>✓ Bathrooms</h3>
-              <p>Luxury bathroom renovations with premium finishes, waterproofing, and bespoke design</p>
+          <div className="section-header">
+            <span className="sub-title">WHAT WE DO</span>
+            <h2 className="main-title">SIX TRADES. ONE TEAM.</h2>
+          </div>
+
+          <div className="trades-grid">
+            <div className="trade-card">
+              <div className="trade-icon">🚿</div>
+              <h3>BATHROOMS</h3>
+              <p>Luxury renovations with premium waterproofing and bespoke finishes.</p>
+              <span className="trade-price">From £5,000</span>
             </div>
-            <div className="service-card">
-              <h3>✓ Kitchens</h3>
-              <p>Modern kitchen refurbishments featuring handleless cabinetry and integrated appliances</p>
+            <div className="trade-card">
+              <div className="trade-icon">🍳</div>
+              <h3>KITCHENS</h3>
+              <p>Modern refurbishments with high-end cabinetry and integrated appliances.</p>
+              <span className="trade-price">From £8,000</span>
             </div>
-            <div className="service-card">
-              <h3>✓ Full Home Renovations</h3>
-              <p>Complete home transformations with expert craftsmanship and attention to detail</p>
+            <div className="trade-card">
+              <div className="trade-icon">🏠</div>
+              <h3>RENOVATIONS</h3>
+              <p>Complete home transformations managed by our expert team.</p>
+              <span className="trade-price">From £15,000</span>
             </div>
-            <div className="service-card">
-              <h3>✓ Bespoke Carpentry</h3>
-              <p>Custom-made storage solutions for kitchens, bathrooms, wardrobes, and under-stair storage</p>
+            <div className="trade-card">
+              <div className="trade-icon">🪵</div>
+              <h3>CARPENTRY</h3>
+              <p>Bespoke storage, wardrobes, and custom under-stair solutions.</p>
+              <span className="trade-price">From £1,500</span>
             </div>
-            <div className="service-card">
-              <h3>✓ Garden & Outdoor Living</h3>
-              <p>Garden design, landscaping, patio installation, and summer house construction</p>
+            <div className="trade-card">
+              <div className="trade-icon">🌳</div>
+              <h3>GARDENS</h3>
+              <p>Landscaping, summer houses, and premium outdoor living spaces.</p>
+              <span className="trade-price">From £3,000</span>
             </div>
-            <div className="service-card">
-              <h3>✓ Extensions</h3>
-              <p>Structural extensions and modern house additions with premium finishes</p>
+            <div className="trade-card">
+              <div className="trade-icon">🏗️</div>
+              <h3>EXTENSIONS</h3>
+              <p>Structural additions to expand and elevate your living space.</p>
+              <span className="trade-price">From £25,000</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Google Reviews Section */}
-      <section className="reviews-section">
+      {/* Process Section */}
+      <section id="process" className="process-section">
         <div className="container">
-          <h2>What Our Clients Say</h2>
-          <div className="reviews-grid">
-            <div className="review-card">
-              <div className="stars">★★★★★</div>
-              <p>"Exceptional craftsmanship and attention to detail. BF Construction transformed our bathroom into a luxury retreat. Highly recommended!"</p>
-              <strong>- Sarah M.</strong>
+          <div className="section-header">
+            <span className="sub-title">OUR PROCESS</span>
+            <h2 className="main-title">HOW WE WORK</h2>
+          </div>
+
+          <div className="process-steps">
+            <div className="step">
+              <span className="step-num">01</span>
+              <h4>CONSULTATION</h4>
+              <p>We visit your site to understand your vision and provide a detailed quote.</p>
             </div>
-            <div className="review-card">
-              <div className="stars">★★★★★</div>
-              <p>"Professional team, excellent communication, and outstanding results. Our kitchen renovation exceeded all expectations."</p>
-              <strong>- James K.</strong>
+            <div className="step">
+              <span className="step-num">02</span>
+              <h4>DESIGN & PLAN</h4>
+              <p>Our experts create a tailored plan focusing on quality and functionality.</p>
             </div>
-            <div className="review-card">
-              <div className="stars">★★★★★</div>
-              <p>"From initial consultation to final touches, BF Construction delivered premium quality. Worth every penny!"</p>
-              <strong>- Emma L.</strong>
+            <div className="step">
+              <span className="step-num">03</span>
+              <h4>CONSTRUCTION</h4>
+              <p>Expert execution with attention to detail and daily progress updates.</p>
+            </div>
+            <div className="step">
+              <span className="step-num">04</span>
+              <h4>HANDOVER</h4>
+              <p>A final walkthrough ensuring every detail meets our premium standards.</p>
             </div>
           </div>
-          <div className="google-link">
-            <a href="https://share.google/lkFdWaO63XaxsgRce" target="_blank" rel="noopener noreferrer">
-              View Our Google Page & Reviews
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section id="reviews" className="reviews-premium">
+        <div className="container">
+          <div className="section-header">
+            <span className="sub-title">TESTIMONIALS</span>
+            <h2 className="main-title">CLIENT STORIES</h2>
+          </div>
+
+          <div className="reviews-carousel">
+            <div className="review-item">
+              <div className="stars">★★★★★</div>
+              <p>"Exceptional craftsmanship. BF Construction transformed our home into a luxury retreat. The attention to detail is unmatched."</p>
+              <span className="client-name">SARAH M.</span>
+            </div>
+          </div>
+          
+          <div className="google-cta">
+            <a href="https://share.google/lkFdWaO63XaxsgRce" target="_blank" rel="noopener noreferrer" className="btn-gold-outline">
+              READ ALL GOOGLE REVIEWS
             </a>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="about-section">
+      {/* Contact Footer */}
+      <footer id="contact" className="footer-premium">
         <div className="container">
-          <h2>About BF Construction Solutions LTD</h2>
-          <p>With over 17 years of experience in luxury home renovations, we specialise in creating bespoke spaces that combine functionality with premium aesthetics. Our team of expert craftsmen is dedicated to delivering exceptional results on every project.</p>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="contact-section">
-        <div className="container">
-          <h2>Get In Touch</h2>
-          <div className="contact-methods">
-            <div className="contact-card">
-              <h3>📧 Email</h3>
+          <div className="footer-grid">
+            <div className="footer-info">
+              <h3>BF CONSTRUCTION</h3>
+              <p>Luxury Renovations & Bespoke Solutions</p>
+              <div className="footer-certifications">
+                <span>✓ Insured</span>
+                <span>✓ Guaranteed</span>
+                <span>✓ 17+ Years</span>
+              </div>
+            </div>
+            <div className="footer-contact">
+              <h4>CONTACT</h4>
               <a href="mailto:Info@bfconstruction.co.uk">Info@bfconstruction.co.uk</a>
+              <a href="tel:447865516023">+44 (0)7865 516023</a>
             </div>
-            <div className="contact-card">
-              <h3>💬 WhatsApp</h3>
-              <a href="https://wa.me/447865516023" target="_blank" rel="noopener noreferrer">+44 (0)7865 516023</a>
-            </div>
-            <div className="contact-card">
-              <h3>📷 Instagram</h3>
-              <a href="https://instagram.com/bfconstruction.uk" target="_blank" rel="noopener noreferrer">@bfconstruction.uk</a>
+            <div className="footer-social">
+              <h4>FOLLOW</h4>
+              <a href="https://instagram.com/bfconstruction.uk" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+              <a href="https://wa.me/447865516023" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <p>&copy; 2026 BF Construction Solutions LTD. All rights reserved.</p>
+          <div className="footer-bottom">
+            <p>&copy; 2026 BF CONSTRUCTION SOLUTIONS LTD. BUILT ONCE. BUILT PROPERLY.</p>
+          </div>
         </div>
       </footer>
 
-      {/* Floating WhatsApp Button */}
-      <a href="https://wa.me/447865516023" className="whatsapp-button" target="_blank" rel="noopener noreferrer">
-        💬
+      {/* Floating WhatsApp */}
+      <a href="https://wa.me/447865516023" className="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <span className="wa-icon">💬</span>
       </a>
-
-      {/* Image Modal */}
-      {selectedImage && (
-        <div className="modal" onClick={() => setSelectedImage(null)}>
-          <div className="modal-content">
-            <span className="close">&times;</span>
-            <img src={selectedImage.src} alt={selectedImage.title} />
-            <h3>{selectedImage.title}</h3>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
