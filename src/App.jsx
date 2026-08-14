@@ -36,6 +36,8 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const carouselImages = [
+    '/assets/projects/bathroom/pink-suite/pink-bathroom-1.jpeg',
+    '/assets/projects/bathroom/marble-suite/marble-bathroom-1.jpeg',
     '/assets/projects/bathroom/luxury-view-2.jpg',
     '/assets/projects/bathroom/luxury-view-3.jpg',
     '/assets/projects/bathroom/luxury-view-4.jpg',
@@ -46,6 +48,16 @@ function App() {
   const categories = ['All', 'Bathrooms', 'Kitchens', 'Renovations', 'Gardens', 'Carpentry', 'Laundry', 'Clinic'];
 
   const projects = [
+    // Recently completed bathroom projects
+    { id: 501, category: 'Bathrooms', src: '/assets/projects/bathroom/pink-suite/pink-bathroom-1.jpeg', title: 'Statement Pink Bathroom' },
+    { id: 502, category: 'Bathrooms', src: '/assets/projects/bathroom/pink-suite/pink-bathroom-2.jpeg', title: 'Bespoke Pink Bathroom Panelling' },
+    { id: 503, category: 'Bathrooms', src: '/assets/projects/bathroom/pink-suite/pink-bathroom-3.jpeg', title: 'Bespoke Vanity & Decorative Mirror' },
+    { id: 504, category: 'Bathrooms', src: '/assets/projects/bathroom/pink-suite/pink-bathroom-4.jpeg', title: 'Custom Pink Bathroom Storage' },
+    { id: 505, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-1.jpeg', title: 'Marble Bathroom with Bespoke Vanity' },
+    { id: 506, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-2.jpeg', title: 'Classic Marble Bathroom Suite' },
+    { id: 507, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-3.png', title: 'Luxury Shower Room Details' },
+    { id: 508, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-4.jpeg', title: 'Marble Bathroom Finishing Details' },
+
     // New Luxury Bathroom
     { id: 1, category: 'Bathrooms', src: '/assets/projects/bathroom/luxury-view-2.jpg', title: 'Luxury Lake View Suite' },
     { id: 2, category: 'Bathrooms', src: '/assets/projects/bathroom/luxury-view-1.jpg', title: 'Designer Entrance' },
@@ -307,7 +319,7 @@ function App() {
             <div className="footer-info">
               <h3>BF CONSTRUCTION</h3>
               <p>Luxury Renovations & Bespoke Solutions</p>
-              <p className="service-area">Serving London and surrounding areas, including Clapham Junction.</p>
+              <p className="service-area">Serving London and surrounding areas.</p>
               <div className="footer-certifications">
                 <span>✓ Insured</span>
                 <span>✓ Guaranteed</span>
