@@ -4,17 +4,31 @@ import './App.css';
 const BeforeAfterSlider = ({ before, after, title }) => {
   const [sliderPos, setSliderPos] = useState(50);
   const containerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const handleMove = (e) => {
+    if (!isDragging && e.type !== 'touchmove') return;
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    if (clientX === undefined) return;
+    const x = clientX - rect.left;
     const pos = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPos(pos);
   };
 
   return (
-    <div className="ba-container" ref={containerRef} onMouseMove={handleMove} onTouchMove={handleMove}>
+    <div 
+      className="ba-container" 
+      ref={containerRef} 
+      onMouseMove={handleMove} 
+      onTouchMove={handleMove}
+      onMouseDown={() => setIsDragging(true)}
+      onMouseUp={() => setIsDragging(false)}
+      onMouseLeave={() => setIsDragging(false)}
+      onTouchStart={() => setIsDragging(true)}
+      onTouchEnd={() => setIsDragging(false)}
+    >
       <div className="ba-after" style={{ backgroundImage: `url(${after})` }}></div>
       <div className="ba-before" style={{ backgroundImage: `url(${before})`, width: `${sliderPos}%` }}>
         <span className="ba-label before">BEFORE</span>
@@ -69,7 +83,7 @@ function App() {
     { id: 102, category: 'Kitchens', src: '/kitchen-project-2.jpg', title: 'Modern Marble Kitchen' },
     { id: 103, category: 'Bathrooms', src: '/bathroom-project-1.jpg', title: 'Classic Bathroom' },
     { id: 104, category: 'Bathrooms', src: '/bathroom-project-2.jpg', title: 'Spa-Style Retreat' },
-    { id: 105, category: 'Renovations', src: '/assets/projects/new/renovation-before-after-1.png', title: 'Full Home Renovation Before & After' },
+    { id: 105, category: 'Renovations', src: '/assets/projects/new/renovation-before-after-1.jpg', title: 'Full Home Renovation Before & After' },
     
     // Clinic transformation — original garage converted into treatment space
     { id: 601, category: 'Clinic', isSlider: true, before: '/assets/projects/clinic/before/clinic-garage-before-2.jpg', after: '/assets/projects/clinic/after/clinic-treatment-room-1.jpeg', title: 'Clinic Transformation — Garage to Treatment Space' },
@@ -81,21 +95,21 @@ function App() {
     { id: 205, category: 'Renovations', isSlider: true, before: '/assets/projects/renovations/green-room/before/green-room-before-1.jpg', after: '/assets/projects/renovations/green-room/after/green-room-after-1.jpg', title: 'Green Room Transformation — Before & After' },
     { id: 206, category: 'Renovations', src: '/assets/projects/renovations/green-room/after/green-room-after-2.jpg', title: 'Green Room Renovation — Bespoke Joinery & Herringbone Flooring' },
     { id: 207, category: 'Renovations', src: '/assets/projects/renovations/green-room/before/green-room-before-2.jpg', title: 'Green Room — Original Condition' },
-    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.png', title: 'Pink Bathroom Transformation' },
+    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.jpg', title: 'Pink Bathroom Transformation' },
     { id: 203, category: 'Laundry', isSlider: true, before: '/assets/projects/laundry/clapham-laundry-before.jpg', after: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room — Clapham Junction' },
     
     // Other New Projects
     { id: 301, category: 'Kitchens', src: '/assets/projects/new/kitchen-new-1.jpg', title: 'Modern Herringbone Kitchen' },
     { id: 302, category: 'Gardens', src: '/assets/projects/new/garden-new-1.jpg', title: 'Contemporary Garden' },
-    { id: 303, category: 'Carpentry', src: '/assets/projects/new/carpentry-new-1.png', title: 'Custom Wardrobe' },
+    { id: 303, category: 'Carpentry', src: '/assets/projects/new/carpentry-new-1.jpg', title: 'Custom Wardrobe' },
     { id: 304, category: 'Bathrooms', src: '/assets/projects/new/bathroom-new-1.jpg', title: 'Luxury Bath Detail' },
-    { id: 305, category: 'Bathrooms', src: '/assets/projects/new/bathroom-before-after-2.png', title: 'Bathroom Before & After Study' },
+    { id: 305, category: 'Bathrooms', src: '/assets/projects/new/bathroom-before-after-2.jpg', title: 'Bathroom Before & After Study' },
     { id: 306, category: 'Bathrooms', src: '/bathroom-before-after.jpg', title: 'Complete Bathroom Transformation' },
 
     // Bespoke Laundry Room — Clapham Junction
     { id: 401, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room' },
     { id: 402, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-2.jpg', title: 'Utility Room Cabinetry' },
-    { id: 403, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-3.png', title: 'Made-to-Measure Storage' },
+    { id: 403, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-3.jpg', title: 'Made-to-Measure Storage' },
     { id: 404, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-4.jpeg', title: 'Full-Height Laundry Storage' },
   ];
 
@@ -228,7 +242,7 @@ function App() {
             {filteredProjects.filter(p => !p.isSlider).map(project => (
               <div key={project.id} className="project-card">
                 <div className="project-media">
-                  <img src={project.src} alt={project.title} />
+                  <img src={project.src} alt={project.title} loading="lazy" />
                 </div>
                 <div className="project-hover-info">
                   <h3>{project.title}</h3>
