@@ -78,7 +78,6 @@ function App() {
     { id: 604, category: 'Clinic', src: '/assets/projects/clinic/before/clinic-garage-before-3.jpeg', title: 'Garage Conversion — Before' },
 
     // Transformations (Slider Ready)
-    { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
     { id: 205, category: 'Renovations', isSlider: true, before: '/assets/projects/renovations/green-room/before/green-room-before-1.jpg', after: '/assets/projects/renovations/green-room/after/green-room-after-1.jpg', title: 'Green Room Transformation — Before & After' },
     { id: 206, category: 'Renovations', src: '/assets/projects/renovations/green-room/after/green-room-after-2.jpg', title: 'Green Room Renovation — Bespoke Joinery & Herringbone Flooring' },
     { id: 207, category: 'Renovations', src: '/assets/projects/renovations/green-room/before/green-room-before-2.jpg', title: 'Green Room — Original Condition' },
