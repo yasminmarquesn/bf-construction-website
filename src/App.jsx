@@ -69,7 +69,7 @@ function App() {
     { id: 504, category: 'Bathrooms', src: '/assets/projects/bathroom/pink-suite/pink-bathroom-4.jpeg', title: 'Custom Pink Bathroom Storage' },
     { id: 505, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-1.jpeg', title: 'Marble Bathroom with Bespoke Vanity' },
     { id: 506, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-2.jpeg', title: 'Classic Marble Bathroom Suite' },
-    { id: 507, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-3.png', title: 'Luxury Shower Room Details' },
+    { id: 507, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-3.jpg', title: 'Luxury Shower Room Details' },
     { id: 508, category: 'Bathrooms', src: '/assets/projects/bathroom/marble-suite/marble-bathroom-4.jpeg', title: 'Marble Bathroom Finishing Details' },
 
     // New Luxury Bathroom
