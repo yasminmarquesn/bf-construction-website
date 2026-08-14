@@ -921,3 +921,18 @@ textarea:focus-visible {
     aspect-ratio: 3 / 4;
   }
 }
+
+/* Final image framing: fill the comparison frame without black bars. */
+.ba-container {
+  aspect-ratio: 3 / 4;
+  background: transparent;
+  overflow: hidden;
+}
+
+.ba-before,
+.ba-after {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}

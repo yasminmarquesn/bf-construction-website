@@ -73,7 +73,7 @@ function App() {
     
     // Transformations (Slider Ready)
     { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
-    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/bathroom/pink-suite/pink-bathroom-1.jpeg', title: 'Pink Bathroom Transformation' },
+    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/bathroom/correct-before-after/bathroom-before.png', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.png', title: 'Bathroom Transformation — Before & After' },
     { id: 203, category: 'Laundry', isSlider: true, before: '/assets/projects/laundry/clapham-laundry-before.jpg', after: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room — Clapham Junction' },
     
     // Other New Projects
@@ -81,6 +81,8 @@ function App() {
     { id: 302, category: 'Gardens', src: '/assets/projects/new/garden-new-1.jpg', title: 'Contemporary Garden' },
     { id: 303, category: 'Carpentry', src: '/assets/projects/new/carpentry-new-1.png', title: 'Custom Wardrobe' },
     { id: 304, category: 'Bathrooms', src: '/assets/projects/new/bathroom-new-1.jpg', title: 'Luxury Bath Detail' },
+    { id: 305, category: 'Bathrooms', src: '/assets/projects/new/bathroom-before-after-2.png', title: 'Bathroom Before & After Study' },
+    { id: 306, category: 'Bathrooms', src: '/bathroom-before-after.jpg', title: 'Complete Bathroom Transformation' },
 
     // Bespoke Laundry Room — Clapham Junction
     { id: 401, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room' },
