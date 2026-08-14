@@ -72,13 +72,16 @@ function App() {
     { id: 105, category: 'Renovations', src: '/assets/projects/new/renovation-before-after-1.png', title: 'Full Home Renovation Before & After' },
     
     // Clinic transformation — original garage converted into treatment space
-    { id: 601, category: 'Clinic', isSlider: true, before: '/assets/projects/clinic/before/clinic-garage-before-1.jpeg', after: '/assets/projects/clinic/after/clinic-treatment-room-1.jpeg', title: 'Clinic Transformation — Garage to Treatment Space' },
+    { id: 601, category: 'Clinic', isSlider: true, before: '/assets/projects/clinic/before/clinic-garage-before-2.jpg', after: '/assets/projects/clinic/after/clinic-treatment-room-1.jpeg', title: 'Clinic Transformation — Garage to Treatment Space' },
     { id: 602, category: 'Clinic', src: '/assets/projects/clinic/after/clinic-treatment-room-2.jpeg', title: 'Bespoke Clinic Storage & Treatment Room' },
     { id: 603, category: 'Clinic', src: '/assets/projects/clinic/before/clinic-garage-before-2.jpg', title: 'Original Garage Space — Before' },
     { id: 604, category: 'Clinic', src: '/assets/projects/clinic/before/clinic-garage-before-3.jpeg', title: 'Garage Conversion — Before' },
 
     // Transformations (Slider Ready)
     { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
+    { id: 205, category: 'Renovations', isSlider: true, before: '/assets/projects/renovations/green-room/before/green-room-before-1.jpg', after: '/assets/projects/renovations/green-room/after/green-room-after-1.jpg', title: 'Green Room Transformation — Before & After' },
+    { id: 206, category: 'Renovations', src: '/assets/projects/renovations/green-room/after/green-room-after-2.jpg', title: 'Green Room Renovation — Bespoke Joinery & Herringbone Flooring' },
+    { id: 207, category: 'Renovations', src: '/assets/projects/renovations/green-room/before/green-room-before-2.jpg', title: 'Green Room — Original Condition' },
     { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.png', title: 'Pink Bathroom Transformation' },
     { id: 203, category: 'Laundry', isSlider: true, before: '/assets/projects/laundry/clapham-laundry-before.jpg', after: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room — Clapham Junction' },
     
