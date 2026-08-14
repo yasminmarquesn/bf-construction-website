@@ -43,7 +43,7 @@ function App() {
     '/assets/projects/new/garden-new-1.jpg',
   ];
 
-  const categories = ['All', 'Bathrooms', 'Kitchens', 'Renovations', 'Gardens', 'Carpentry', 'Clinic'];
+  const categories = ['All', 'Bathrooms', 'Kitchens', 'Renovations', 'Gardens', 'Carpentry', 'Laundry', 'Clinic'];
 
   const projects = [
     // New Luxury Bathroom
@@ -62,12 +62,19 @@ function App() {
     // Transformations (Slider Ready)
     { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
     { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/transform/bathroom-after.jpg', title: 'Complete Bathroom Refurb' },
+    { id: 203, category: 'Laundry', isSlider: true, before: '/assets/projects/laundry/clapham-laundry-before.jpg', after: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room — Clapham Junction' },
     
     // Other New Projects
     { id: 301, category: 'Kitchens', src: '/assets/projects/new/kitchen-new-1.jpg', title: 'Modern Herringbone Kitchen' },
     { id: 302, category: 'Gardens', src: '/assets/projects/new/garden-new-1.jpg', title: 'Contemporary Garden' },
     { id: 303, category: 'Carpentry', src: '/assets/projects/new/carpentry-new-1.png', title: 'Custom Wardrobe' },
     { id: 304, category: 'Bathrooms', src: '/assets/projects/new/bathroom-new-1.jpg', title: 'Luxury Bath Detail' },
+
+    // Bespoke Laundry Room — Clapham Junction
+    { id: 401, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room' },
+    { id: 402, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-2.jpg', title: 'Utility Room Cabinetry' },
+    { id: 403, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-3.png', title: 'Made-to-Measure Storage' },
+    { id: 404, category: 'Laundry', src: '/assets/projects/laundry/clapham-laundry-4.jpeg', title: 'Full-Height Laundry Storage' },
   ];
 
   const filteredProjects = activeCategory === 'All' 
@@ -123,11 +130,11 @@ function App() {
                 </div>
                 <div className="hero-trust">
                   <div className="trust-item">
-                    <span className="gold-text">4.9/5</span> Google Rating
+                    <span className="gold-text">5/5</span> Google Rating
                   </div>
                   <div className="trust-divider"></div>
                   <div className="trust-item">
-                    <span className="gold-text">10 YEAR</span> Guarantee
+                    <span className="gold-text">QUALITY</span> Workmanship Guarantee
                   </div>
                 </div>
               </div>
@@ -198,7 +205,7 @@ function App() {
         <div className="container">
           <div className="section-header">
             <span className="sub-title">WHAT WE DO</span>
-            <h2 className="main-title">SIX TRADES. ONE TEAM.</h2>
+            <h2 className="main-title">OUR CORE SERVICES</h2>
           </div>
 
           <div className="trades-grid">
@@ -206,37 +213,31 @@ function App() {
               <div className="trade-icon">🚿</div>
               <h3>BATHROOMS</h3>
               <p>Luxury renovations with premium waterproofing and bespoke finishes.</p>
-              <span className="trade-price">From £5,000</span>
             </div>
             <div className="trade-card">
               <div className="trade-icon">🍳</div>
               <h3>KITCHENS</h3>
               <p>Modern refurbishments with high-end cabinetry and integrated appliances.</p>
-              <span className="trade-price">From £8,000</span>
             </div>
             <div className="trade-card">
               <div className="trade-icon">🏠</div>
               <h3>RENOVATIONS</h3>
               <p>Complete home transformations managed by our expert team.</p>
-              <span className="trade-price">From £15,000</span>
             </div>
             <div className="trade-card">
               <div className="trade-icon">🪵</div>
               <h3>CARPENTRY</h3>
               <p>Bespoke storage, wardrobes, and custom under-stair solutions.</p>
-              <span className="trade-price">From £1,500</span>
             </div>
             <div className="trade-card">
               <div className="trade-icon">🌳</div>
               <h3>GARDENS</h3>
               <p>Landscaping, summer houses, and premium outdoor living spaces.</p>
-              <span className="trade-price">From £3,000</span>
             </div>
             <div className="trade-card">
               <div className="trade-icon">🏗️</div>
               <h3>EXTENSIONS</h3>
               <p>Structural additions to expand and elevate your living space.</p>
-              <span className="trade-price">From £25,000</span>
             </div>
           </div>
         </div>
@@ -306,6 +307,7 @@ function App() {
             <div className="footer-info">
               <h3>BF CONSTRUCTION</h3>
               <p>Luxury Renovations & Bespoke Solutions</p>
+              <p className="service-area">Serving London and surrounding areas, including Clapham Junction.</p>
               <div className="footer-certifications">
                 <span>✓ Insured</span>
                 <span>✓ Guaranteed</span>
