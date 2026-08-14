@@ -896,3 +896,28 @@ textarea:focus-visible {
     font-size: 0.68rem;
   }
 }
+
+/* Portrait-safe Before & After viewer: show the complete finished bathroom image. */
+.ba-container {
+  aspect-ratio: 3 / 4;
+  background: #1a1a1a;
+}
+
+.ba-before,
+.ba-after {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .ba-container {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (max-width: 480px) {
+  .ba-container {
+    aspect-ratio: 3 / 4;
+  }
+}
