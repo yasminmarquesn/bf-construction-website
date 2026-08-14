@@ -73,7 +73,7 @@ function App() {
     
     // Transformations (Slider Ready)
     { id: 201, category: 'Renovations', isSlider: true, before: '/assets/projects/transform/renovation-before.jpg', after: '/assets/projects/transform/renovation-after.jpg', title: 'Living Space Transformation' },
-    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/bathroom/correct-before-after/bathroom-before.png', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.png', title: 'Bathroom Transformation — Before & After' },
+    { id: 202, category: 'Bathrooms', isSlider: true, before: '/assets/projects/transform/bathroom-before.jpg', after: '/assets/projects/bathroom/correct-before-after/bathroom-after.png', title: 'Pink Bathroom Transformation' },
     { id: 203, category: 'Laundry', isSlider: true, before: '/assets/projects/laundry/clapham-laundry-before.jpg', after: '/assets/projects/laundry/clapham-laundry-1.jpg', title: 'Bespoke Laundry Room — Clapham Junction' },
     
     // Other New Projects
